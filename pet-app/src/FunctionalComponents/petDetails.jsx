@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState,useEffect } from 'react';
-import '../Css/PetDetails.css'; // We'll style the cards in an external CSS file
+import '../Css/PetDetails.css'; 
 import petImage1 from '../assets/pet1.jpeg';
 import FilterDropdown from './FilterDrop';
 import { useNavigate } from 'react-router-dom';
