@@ -1,0 +1,29 @@
+.requests-container {
+  padding: 20px;
+  text-align: center;
+}
+
+.requests-table {
+  margin: 20px auto;
+  border-collapse: collapse;
+  width: 80%;
+  max-width: 800px;
+}
+
+.requests-table th,
+.requests-table td {
+  border: 1px solid #ccc;
+  padding: 10px;
+  text-align: center;
+}
+
+.requests-table th {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.requests-table tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+

@@ -1,0 +1,55 @@
+import React from 'react';
+import '../Css/Home.css';
+import petImage1 from '../assets/pet1.jpeg';
+import petImage2 from '../assets/cat1.jpeg';
+import { useNavigate } from 'react-router-dom';
+
+function Home() {
+  const navigate=useNavigate();
+
+  const handleClick=()=>{
+    navigate('/about');
+  }
+  const handleClick1=()=>{
+    navigate('/quiz');
+  }
+  const handleClick2=()=>{
+    navigate('/pet-details');
+  }
+ 
+  return (
+    <div className="home-page">
+      <div className="home-intro">
+        <h1>Welcome to PetDestined</h1>
+        <p>Our mission is to provide a safe haven for animals and help them find their forever homes.</p>
+      </div>
+      
+
+        <h2>Meet Our Featured Pets</h2> 
+      <div className="featured-pets">
+        <div className="pet-card">
+          <img src={petImage1} alt="Pet 1" />
+          <p>Name: Max, Age: 2, Breed: Labrador</p>
+        </div>
+        <div className="pet-card">
+          <img src={petImage2} alt="Pet 2" />
+          <p>Name: Luna, Age: 1, Breed: Cat</p>
+        </div>
+      </div>
+
+      <div className="call-to-action">
+        <button onClick={handleClick}>Learn More About Adoption</button>
+      </div>
+
+     
+
+      <div className="interactive-elements">
+        <h2>Find Your Perfect Match</h2>
+        <button onClick={handleClick1}>Take Our Pet Matching Quiz</button>
+        <button onClick={handleClick2}>Head to our pet page</button>
+      </div>
+    </div>
+  );
+}
+
+export default Home;

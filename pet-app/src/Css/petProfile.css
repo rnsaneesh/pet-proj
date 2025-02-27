@@ -1,0 +1,82 @@
+/* Container for the profile page */
+.pet-profile-container {
+    padding: 20px;
+    box-sizing: border-box;
+    min-height: 100vh;
+    position: relative;
+  }
+  
+  /* Content on the left */
+  .content-section {
+    width: 50%;
+    float: left;
+  }
+  
+  .content-section h2 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+  }
+  
+  .content-section p {
+    font-size: 1.2rem;
+    margin: 5px 0;
+  }
+  
+  /* Image on the right */
+  .image-section {
+    width: 45%;
+    float: right;
+    text-align: right;
+  }
+  
+  .profile-image {
+    max-width: 100%;
+    border-radius: 10px;
+    object-fit: cover;
+  }
+  
+  /* Clear floats */
+  .pet-profile-container::after {
+    content: '';
+    display: table;
+    clear: both;
+  }
+  
+  /* Button at the bottom center */
+  .button-section {
+    text-align: center;
+    position: absolute;
+    
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+  }
+  
+  .button-section button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1.2rem;
+  }
+  
+  .button-section button:hover {
+    background-color: #45a049;
+  }
+
+.content-section button{
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1.2rem;
+}
+.content-section button:hover{
+    background-color: #45a049;
+}
+  
