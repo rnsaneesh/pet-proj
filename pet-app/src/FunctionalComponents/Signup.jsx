@@ -1,8 +1,11 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useState } from "react";
 import "../Css/Signup.css";
 import backgroundImage from '../assets/signup.avif';
+import axios from 'axios';
 
-function Signup() {
+function SignupCust() {
+  let nav = useNavigate();
   /*}  const backgroundStyle = {
           backgroundImage: `url(${backgroundImage})`,
           backgroundSize: 'cover',
@@ -16,29 +19,87 @@ function Signup() {
           left:0,
           zIndex:-1
         };*/
-      
+        var [firstname,setFN]=useState("");
+      var [lastname,setLN]=useState("");
+      var[name,setName]=useState("");
+      var [email,setEmail]=useState("");
+      var[password,setPassword]=useState("");
+      var[phn,setPh]=useState(0);
+      var [UserType, setUserType] = useState("customer");
+
+   
+        console.log(UserType);
+        const handleSignup = async(event) => {
+          event.preventDefault();
+          const req=await axios.post("http://localhost:3001/signup", {
+            firstName: firstname,
+            lastName: lastname,
+            email: email,
+            userName:name,
+            password: password,
+            phoneNumber: phn,
+            userType:UserType
+          });
+          const message=req.data.message;
+          const isSignup=req.data.isSignup;
+          console.log(isSignup);
+          if(isSignup){
+            nav("/login", {replace: true});
+            alert(message);
+            // window.location.href = "/login";;
+          }
+          else{
+            alert(message)
+          }
+        };
     
     return (
       <div  className="signup-container">
 
         <div className="signup-form">
-        <form>
+        <form onSubmit={handleSignup} action="/home">
+      
+        <div className="form-group">
         <h2>SignUp</h2>
-        <div className="form-group">
-          <label htmlFor="frname">FirstName:</label>
-          <input type="text" id="name" placeholder="enter your first name" /><br /></div>
-          <div className="form-group">
-          <label htmlFor="lnname">LastName:</label>
-          <input type="text" id="name" placeholder="enter your last name" /><br /></div>
-        <div className="form-group">
-          <label htmlFor="usrname">Username:</label>
-          <input type="text" id="name" placeholder="enter a username(ex:petlover143)" /><br /></div>
-         <div className="form-group">
+          <label htmlFor="name">firstName:</label>
+          <input type="text" id="name" placeholder="enter a name" onChange={(e)=>setFN(e.target.value)} /><br />
+
+          <label htmlFor="name">lastName:</label>
+          <input type="text" id="name" placeholder="enter a name" onChange={(e)=>setLN(e.target.value)} /><br />
+          <label htmlFor="name">UserNam/OrgName</label>
+          <input type="text" id="name" placeholder="enter a" onChange={(e)=>setName(e.target.value)} /><br />
+  
           <label htmlFor="email">Email:</label>
-          <input type="email" id="email" placeholder="enter a email" /><br /></div>
-          <div className="form-group">
+          <input type="email" id="email" placeholder="enter a email" onChange={(e)=>setEmail(e.target.value)} /><br />
+  
           <label htmlFor="password">Password:</label>
-          <input type="password" id="password" placeholder="enter a password" /><br /></div>
+          <input type="password" id="password" placeholder="enter a password" onChange={(e)=>setPassword(e.target.value)} /><br />
+          <label htmlFor="password">mobile:</label>
+          <input type="number" id="mobile" placeholder="enter a number" onChange={(e)=>setPh(e.target.value)} /><br />
+
+          <div className="user-type">
+              <label>
+                <input
+                  type="radio"
+                  name="userType"
+                  value="customer"
+                  checked={UserType === 'customer'}
+                  onChange={(e) => setUserType(e.target.value)}
+                />
+                Customer
+              </label>
+              <label>
+                <input
+                  type="radio"
+                  name="userType"
+                  value="organization"
+                  checked={UserType === 'organization'}
+                  onChange={(e) => setUserType(e.target.value)}
+                />
+                Organization
+              </label>
+            </div>
+  </div>
   
           
   
@@ -58,5 +119,5 @@ function Signup() {
     );
   }
   
-  export default Signup;
+  export default SignupCust;
   

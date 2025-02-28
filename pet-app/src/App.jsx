@@ -11,8 +11,10 @@ import PetProfile from './FunctionalComponents/petProfile'
 import PetDetails from './FunctionalComponents/petDetails'
 import RequestsPage from './FunctionalComponents/RequestsPage'
 import Quiz from './FunctionalComponents/Quiz'
+import PetInfoForm from './FunctionalComponents/AddPets'
 import ProtectedRoute from './FunctionalComponents/ProtectedRoute'
 import AddPet from './FunctionalComponents/AddPets'
+
 import {BrowserRouter,Routes,Route} from 'react-router-dom'
 function App() {
   //const [count, setCount] = useState(0)
@@ -23,7 +25,7 @@ function App() {
       <BrowserRouter>
       <Navbar></Navbar>
       <Routes>
-      <Route path='/' element={<Home/>} />
+      <Route path='/' element={<Home />} />
       <Route path="/about" element={<About />}></Route>
       <Route path='/login' element={<Login />}></Route>
       <Route path='/signup' element={<Signup />} />
@@ -31,6 +33,8 @@ function App() {
       <Route path="/pet/:id" element={<PetProfile />} />
       <Route path="/requests" element={<RequestsPage />} />
       <Route path="/quiz" element={<Quiz />} />
+      <Route path="/petadd" element={<PetInfoForm />} />
+
 
   
   <Route

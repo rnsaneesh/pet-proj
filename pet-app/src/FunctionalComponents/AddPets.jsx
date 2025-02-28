@@ -1,43 +1,41 @@
-import React, { useState, useContext } from 'react';
-import ApiAxios from '../Api/ApiAxios';
-import { UserContext } from '../Context/UserContext';
-import { useNavigate } from 'react-router-dom';
+// Frontend: PetInfoForm.js
+import { useState } from 'react';
+import axios from 'axios';
 
-const AddPet = () => {
-  const [petDetails, setPetDetails] = useState({
-    name: '',
-    breed: '',
-    age: '',
-    description: '',
-    image: ''
-  });
-  const { user } = useContext(UserContext);
-  const navigate = useNavigate();
+function PetInfoForm() {
+  const [petName, setPetName] = useState("");
+  const [breed, setBreed] = useState("");
+  const [age, setAge] = useState("");
 
-  const handleChange = (e) => {
-    setPetDetails({ ...petDetails, [e.target.name]: e.target.value });
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const handlePetInfoSubmit = async (event) => {
+    event.preventDefault();
     try {
-      await ApiAxios.post('/pets/add', { ...petDetails, addedBy: user._id });
-      navigate('/pet-details');
-    } catch (err) {
-      console.error(err);
+      const res = await axios.post("http://localhost:3001/petadd", {
+        petName,
+        breed,
+        age
+      });
+      alert(res.data.message);
+    } catch (error) {
+      console.error("Pet Info Error:", error);
+      alert("Something went wrong. Please try again.");
     }
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input type="text" name="name" placeholder="Pet Name" onChange={handleChange} required />
-      <input type="text" name="breed" placeholder="Breed" onChange={handleChange} required />
-      <input type="text" name="age" placeholder="Age" onChange={handleChange} required />
-      <textarea name="description" placeholder="Description" onChange={handleChange} required />
-      <input type="text" name="image" placeholder="Image URL" onChange={handleChange} required />
-      <button type="submit">Add Pet</button>
+    <form onSubmit={handlePetInfoSubmit}>
+      <label>Pet Name:</label>
+      <input type="text" onChange={(e) => setPetName(e.target.value)} required />
+
+      <label>Breed:</label>
+      <input type="text" onChange={(e) => setBreed(e.target.value)} required />
+
+      <label>Age:</label>
+      <input type="number" onChange={(e) => setAge(e.target.value)} required />
+
+      <button type="submit">Submit</button>
     </form>
   );
-};
+}
 
-export default AddPet;
+export default PetInfoForm;

@@ -59,6 +59,10 @@
     background-repeat: no-repeat;
     z-index: -1;
   }
+  .user-type{
+    margin-top:10px;
+    display: flex;
+  }
   
  
   

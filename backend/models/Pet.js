@@ -2,12 +2,12 @@
 const mongoose = require('mongoose');
 
 const petSchema = new mongoose.Schema({
-  name: String,
+  Petname: String,
   breed: String,
   age: String,
   orgName: String,
   description: String,
-  image: String,
+  
   addedBy: { type: mongoose.Schema.Types.ObjectId, ref: 'User' }
 });
 
