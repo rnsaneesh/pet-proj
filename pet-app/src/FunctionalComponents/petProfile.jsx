@@ -1,7 +1,7 @@
 import React from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import petImage1 from '../assets/pet1.jpeg';
-import '../Css/PetProfile.css';
+import '../Css/petProfile.css';
 const pets = [
   { id: 1, name: 'Buddy', age:2, breed: 'Dog', image: petImage1 },
   { id: 2, name: 'Mittens',age:2, breed: 'Cat', image: petImage1 },
