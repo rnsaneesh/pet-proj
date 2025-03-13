@@ -12,7 +12,7 @@ const cors = require('cors');
 
 // Allow requests from your Vercel domain
 const corsOptions = {
-  origin: 'http://localhost:5173', 
+  origin: 'https://pet-proj-three.vercel.app', 
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   credentials: true,
 };
