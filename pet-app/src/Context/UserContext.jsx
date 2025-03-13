@@ -11,7 +11,7 @@ export const UserProvider = ({ children }) => {
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const response = await ApiAxios.get('/auth/user');
+        const response = await axios.get();
         setUser(response.data);
       } catch (err) {
         console.error(err);
