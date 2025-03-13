@@ -3,6 +3,8 @@ import { Link, useNavigate } from "react-router-dom";
 import backgroundImage from '../assets/login.avif';
 import "../Css/Login.css";
 import axios from 'axios';
+
+const API_URL = process.env.REACT_APP_API_URL;
 function Login(){
     const nav=useNavigate();
     const backgroundStyle = {
@@ -26,7 +28,7 @@ function Login(){
 
       const handleSignup = async(event) => {
         event.preventDefault();
-        const req=await axios.post("http://localhost:3001/login", {
+        const req=await axios.post(`${API_URL}/login`, {
           
           
           userName:name,

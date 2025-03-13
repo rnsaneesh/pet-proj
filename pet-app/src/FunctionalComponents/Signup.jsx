@@ -4,6 +4,8 @@ import "../Css/Signup.css";
 import backgroundImage from '../assets/signup.avif';
 import axios from 'axios';
 
+const API_URL = process.env.REACT_APP_API_URL;
+
 function SignupCust() {
   let nav = useNavigate();
   /*}  const backgroundStyle = {
@@ -31,7 +33,7 @@ function SignupCust() {
         console.log(UserType);
         const handleSignup = async(event) => {
           event.preventDefault();
-          const req=await axios.post("http://localhost:3001/signup", {
+          const req=await axios.post(`${API_URL}/signup`, {
             firstName: firstname,
             lastName: lastname,
             email: email,
