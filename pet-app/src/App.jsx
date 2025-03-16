@@ -12,7 +12,7 @@ import PetDetails from './FunctionalComponents/petDetails'
 import RequestsPage from './FunctionalComponents/RequestsPage'
 import Quiz from './FunctionalComponents/Quiz'
 import PetInfoForm from './FunctionalComponents/AddPets'
-import ProtectedRoute from './FunctionalComponents/ProtectedRoute'
+//import ProtectedRoute from './FunctionalComponents/ProtectedRoute'
 import AddPet from './FunctionalComponents/AddPets'
 
 import {BrowserRouter,Routes,Route} from 'react-router-dom'
@@ -31,13 +31,13 @@ function App() {
       <Route path='/signup' element={<Signup />} />
       <Route path='/pet-details' element={<PetDetails />} />
       <Route path="/pet/:id" element={<PetProfile />} />
-      <Route path="/requests" element={<RequestsPage />} />
+      <Route path="/request" element={<RequestsPage />} />
       <Route path="/quiz" element={<Quiz />} />
       <Route path="/petadd" element={<PetInfoForm />} />
 
 
   
-  <Route
+  {/*<Route
     path="/add-pet"
     element={
       <ProtectedRoute allowedRoles={['Organization']}>
@@ -52,7 +52,7 @@ function App() {
         <RequestsPage />
       </ProtectedRoute>
     }
-  />
+  />*/}
 
 
 

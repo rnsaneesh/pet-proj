@@ -1,13 +1,14 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import backgroundImage from '../assets/login.avif';
+import axios from "axios";
+import AuthContext from "../Context/AuthContext";
+import backgroundImage from "../assets/login.avif";
 import "../Css/Login.css";
-import axios from 'axios';
 
 const API_URL = import.meta.env.VITE_API_URL;
 
 function Login(){
-    const nav=useNavigate();
+    //const nav=useNavigate();
     const backgroundStyle = {
         backgroundImage: `url(${backgroundImage})`,
         backgroundSize: 'cover',
@@ -24,28 +25,24 @@ function Login(){
 
       };
 
-      var[name,setName]=useState("");
-      var[password,setPassword]=useState("");
-
-      const handleSignup = async(event) => {
-        event.preventDefault();
-        const req=await axios.post(`${API_URL}/login`, {
+      const { login } = useContext(AuthContext);
+      const { fetchUserType } = useContext(AuthContext);
+      const nav = useNavigate();
+  
+      const [name, setName] = useState("");
+      const [password, setPassword] = useState("");
+  
+      const handleLogin = async (event) => {
+          event.preventDefault();
+          const response = await login(name, password);
           
-          
-          userName:name,
-          password: password,
-         
-        });
-        const message=req.data.message;
-        const isLogin=req.data.isLogin;
-        const userType = req.data.userType;
-        if(isLogin){
-            nav("/", {replace: true});
-            alert(message);
-        }
-        else{
-          alert(message)
-        }
+          if (response.isLogin) {
+            fetchUserType(name);
+              nav("/", { replace: true });
+              alert(response.message);
+          } else {
+              alert(response.message);
+          }
       };
     
     
@@ -56,7 +53,7 @@ function Login(){
 
 </div>
             <div className="login-form">
-            <form  onSubmit={handleSignup} action="/">
+            <form  onSubmit={handleLogin} action="/">
             <h2>Login</h2>
     <div className="form-group">
    <label htmlFor="name">Username:</label>

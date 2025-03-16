@@ -3,16 +3,12 @@ import '../Css/Home.css';
 import petImage1 from '../assets/pet1.jpeg';
 import petImage2 from '../assets/cat1.jpeg';
 import { useNavigate } from 'react-router-dom';
+import { useContext } from "react";
+import AuthContext from "../Context/AuthContext";
 
 function Home() {
   const navigate = useNavigate();
-  const [userType, setUserType] = useState('');
-
-  useEffect(() => {
-    // Get userType from localStorage
-    const type = localStorage.getItem('userType');
-    setUserType(type);
-  }, []);
+  const { userType } = useContext(AuthContext);
 
   const handleClick = () => {
     navigate('/about');

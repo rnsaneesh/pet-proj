@@ -1,74 +1,65 @@
-import React from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
-import petImage1 from '../assets/pet1.jpeg';
-import '../Css/petProfile.css';
-const pets = [
-  { id: 1, name: 'Buddy', age:2, breed: 'Dog', image: petImage1 },
-  { id: 2, name: 'Mittens',age:2, breed: 'Cat', image: petImage1 },
-  { id: 3, name: 'Charlie',age:2, breed: 'Dog', image: petImage1 },
-  { id: 4, name: 'Whiskers',age:2, breed: 'Cat', image: petImage1 },
-  { id: 5, name: 'Max',age:2, breed: 'Dog', image: petImage1 },
-  { id: 6, name: 'Shadow',age:2, breed: 'Cat', image: petImage1 },
-  { id: 7, name: 'Bella',age:2, breed: 'Dog', image: petImage1 },
-  { id: 8, name: 'Luna',age:2, breed: 'Cat', image: petImage1 },
-  { id: 9, name: 'Rocky',age:2, breed: 'Dog', image: petImage1 },
-  { id: 10, name: 'Smokey',age:2, breed: 'Cat', image: petImage1},
-  { id: 11, name: 'Daisy',age:2, breed: 'Dog', image: petImage1 },
-  { id: 12, name: 'Tiger',age:2, breed: 'Cat', image: petImage1 },
-  { id: 13, name: 'Milo',age:2, breed: 'Dog', image: petImage1 },
-  { id: 14, name: 'Coco',age:2, breed: 'Cat', image: petImage1 },
-  { id: 15, name: 'Lucy',age:2, breed: 'Dog', image: petImage1 }
-];
+import React, { useEffect, useState, useContext } from "react";
+import { useParams, useNavigate } from "react-router-dom";
+import axios from "axios";
+import AuthContext from "../Context/AuthContext"; // Import context
+import petImage1 from "../assets/pet1.jpeg";
+import "../Css/petProfile.css";
 
-
+const API_URL = import.meta.env.VITE_API_URL;
 
 const PetProfile = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const pet = pets.find(p => p.id === parseInt(id));
+  const { userName } = useContext(AuthContext); // Get userName from context
+  const [pet, setPet] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  if (!pet) {
-    return <h2>Pet not found!</h2>;
-  }
+  useEffect(() => {
+    const fetchPet = async () => {
+      try {
+        const response = await axios.get(`${API_URL}/pet/${id}`);
+        setPet(response.data);
+      } catch (err) {
+        setError("Pet not found!");
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchPet();
+  }, [id]);
 
-  const handleRequest = () => {
-    const userName = prompt("Enter your name:");
+  const handleRequest = async () => {
     if (!userName) {
-      alert("Name is required to send a request!");
+      alert("You need to be logged in to send a request!");
       return;
     }
 
-
-
-    let existingRequests = JSON.parse(localStorage.getItem('petRequests')) || [];
-    // Check if request already exists
-    if (!existingRequests.some(request => request.id === pet.id && request.userName === userName)) {
-        existingRequests.push({
-          id: pet.id,
-          name: pet.name,
-          userName: userName
-        });
-        localStorage.setItem('petRequests', JSON.stringify(existingRequests));
-        alert('Request sent!');
-      } else {
-        alert('You have already sent a request for this pet!');
-      }
+    try {
+      await axios.post(`${API_URL}/request`, { petId: id, userName, petName: pet.petName });
+      alert("Request sent successfully!");
+    } catch (err) {
+      alert(err.response?.data || "Error sending request!");
+    }
   };
+
+  if (loading) return <h2>Loading...</h2>;
+  if (error) return <h2>{error}</h2>;
 
   return (
     <div className="pet-profile-container">
       <div className="content-section">
-        <h2>{pet.name}</h2>
-        
+        <h2>{pet.petName}</h2>
         <p><strong>Age:</strong> {pet.age}</p>
         <p><strong>Breed:</strong> {pet.breed}</p>
-        <p><strong>Description:</strong> {pet.description}</p>
+        <p><strong>Description:</strong> {pet.additionalInfo}</p>
+        <p><strong>Handled By:</strong> {pet.OrgName}</p>
 
         <button onClick={handleRequest}>Request</button>
       </div>
-      
+
       <div className="image-section">
-        <img src={pet.image} alt={pet.name} className="profile-image" />
+        <img src={petImage1} alt={pet.petName} className="profile-image" />
       </div>
 
       <div className="button-section">

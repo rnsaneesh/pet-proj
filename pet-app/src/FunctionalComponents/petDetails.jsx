@@ -4,7 +4,7 @@ import '../Css/petDetails.css';
 import petImage1 from '../assets/pet1.jpeg';
 import FilterDropdown from './FilterDrop';
 import { useNavigate } from 'react-router-dom';
-import ApiAxios from '../Api/ApiAxios'
+import axios from 'axios';
 {/*const pets = [
   { id: 1, name: 'Buddy', age:2, breed: 'Dog', image: petImage1 },
   { id: 2, name: 'Mittens',age:2, breed: 'Cat', image: petImage1 },
@@ -23,15 +23,17 @@ import ApiAxios from '../Api/ApiAxios'
   { id: 15, name: 'Lucy',age:2, breed: 'Dog', image: petImage1 }
 ];*/}
 
+const API_URL = import.meta.env.VITE_API_URL;
+
 const PetDetails = () => {
 
-    const [filteredPets, setFilteredPets] = useState(pets);
+    const [filteredPets, setFilteredPets] = useState([]);
 const [pets, setPets] = useState([]);
 
   useEffect(() => {
     const fetchPets = async () => {
       try {
-        const response = await ApiAxios.get('/pets');
+        const response = await axios.get(`${API_URL}/pets`);
         setPets(response.data);
       } catch (err) {
         console.error(err);
@@ -44,7 +46,7 @@ const [pets, setPets] = useState([]);
 
     const filtered = pets.filter(pet => 
       (breed ? pet.breed === breed : true) &&
-      (org ? pet.org === org : true) &&
+      (org ? pet.OrgName === org : true) &&
       (age ? pet.age === age : true)
     );
 
@@ -62,10 +64,10 @@ const [pets, setPets] = useState([]);
       </div>
     <div className="pet-grid">
       {pets.map((pet) => (
-        <div className="pet-card" key={pet.id} onClick={() => handleCardClick(pet.id)}>
-          <img src={pet.image} alt={pet.name} className="pet-image" />
+        <div className="pet-card" key={pet._id} onClick={() => handleCardClick(pet._id)}>
+          <img src={petImage1} alt={pet.petName} className="pet-image" />
           
-          <p>Name:{pet.name} Age:{pet.age} Breed:{pet.breed}</p>
+          <p>Name:{pet.petName} Age:{pet.age} Breed:{pet.breed}</p>
         </div>
       ))}
     </div>
