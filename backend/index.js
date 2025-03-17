@@ -4,7 +4,8 @@ const dotenv = require("dotenv");
 const bcrypt = require("bcrypt");
 const Signup = require('./models/User');
 const Pet=require("./models/Pet");
-const Request=require("./models/Requests")
+const Request=require("./models/Requests");
+const QuizResponse = require("./models/QuizResponse");
 
 const app = express();
 app.use(express.json());
@@ -62,11 +63,38 @@ app.post("/signup", async(req, res) => {
   }
 });
 
-app.get('/getsignupdetails', async(req,res)=>{
-  const signup = await Signup.find();
-  console.log(signup)
-  res.send("signup details fetched");
-})
+app.get("/getUserProfile", async (req, res) => {
+  try {
+    const { userName } = req.query; // Ensure query params work
+
+    if (!userName) {
+      return res.status(400).json({ message: "Username required" });
+    }
+
+    const user = await Signup.findOne({ userName });
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    let quizResponses = [];
+    if (user.userType === "customer") {
+      quizResponses = await QuizResponse.find({ userName });
+    }
+
+    res.status(200).json({
+      userName: user.userName,
+      userType: user.userType,
+      email: user.email,
+      organizationName: user.organizationName || null,
+      quizResponses,
+    });
+  } catch (error) {
+    console.error("Error fetching user profile:", error);
+    res.status(500).json({ message: "Server error" });
+  }
+});
+
+
 
 app.post('/login',async(req,res)=>{
   console.log("welcome to login");
@@ -214,6 +242,26 @@ app.put("/updateRequest/:id", async (req, res) => {
     res.json(updatedRequest);
   } catch (error) {
     console.error("Error updating request:", error);
+    res.status(500).json({ message: "Server error" });
+  }
+});
+
+
+
+app.post("/saveQuizResponse", async (req, res) => {
+  try {
+    const { userName, userType, responses } = req.body;
+
+    if (userType !== "customer") {
+      return res.status(400).json({ message: "Only customers can take the quiz." });
+    }
+
+    const newQuizResponse = new QuizResponse({ userName, userType, responses });
+    await newQuizResponse.save();
+
+    res.status(201).json({ message: "Quiz response saved successfully!" });
+  } catch (error) {
+    console.error("Error saving quiz response:", error);
     res.status(500).json({ message: "Server error" });
   }
 });

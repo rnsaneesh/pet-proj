@@ -1,7 +1,10 @@
 import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 import AuthContext from "../Context/AuthContext";
 import "../Css/RequestsPage.css"; // Import styles
+import { useNavigate } from "react-router-dom";
+
 
 const API_URL = import.meta.env.VITE_API_URL;
 
@@ -9,6 +12,9 @@ const Requests = () => {
   const { userType, userName } = useContext(AuthContext); // Get userType & userName from Context
   const [requests, setRequests] = useState([]);
   const [loading, setLoading] = useState(true);
+
+  const navigate = useNavigate();
+
 
   useEffect(() => {
     const fetchRequests = async () => {
@@ -23,6 +29,24 @@ const Requests = () => {
     };
     fetchRequests();
   }, []);
+
+  const handleProfileClick = async (event, userName) => {
+    event.preventDefault(); // Prevent default anchor navigation
+  
+    try {
+      const response = await axios.get(`${API_URL}/getUserProfile`, {
+        params: { userName },
+      });
+  
+      if (response.data) {
+        navigate("/profile", { state: { userData: response.data } });
+      } else {
+        console.error("User not found");
+      }
+    } catch (error) {
+      console.error("Error fetching profile:", error);
+    }
+  };
 
   const handleStatusChange = async (requestId, status) => {
     try {
@@ -69,7 +93,9 @@ const Requests = () => {
             {filteredRequests.map((req) => (
               <tr key={req._id}>
                 <td>{req.petName}</td>
-                <td>{req.userName}</td>
+                <td><Link to={`/profile/${req.userName}`} onClick={(e) => handleProfileClick(e, req.userName)} className="profile-link">
+                    {req.userName}
+                  </Link></td>
 
                 {/* Customer View: Show Status */}
                 {userType === "customer" && <td>{req.status || "Pending"}</td>}

@@ -12,6 +12,7 @@ import PetDetails from './FunctionalComponents/petDetails'
 import RequestsPage from './FunctionalComponents/RequestsPage'
 import Quiz from './FunctionalComponents/Quiz'
 import PetInfoForm from './FunctionalComponents/AddPets'
+import Profile from './FunctionalComponents/Profile'
 //import ProtectedRoute from './FunctionalComponents/ProtectedRoute'
 import AddPet from './FunctionalComponents/AddPets'
 
@@ -34,6 +35,7 @@ function App() {
       <Route path="/request" element={<RequestsPage />} />
       <Route path="/quiz" element={<Quiz />} />
       <Route path="/petadd" element={<PetInfoForm />} />
+      <Route path="/profile" element={<Profile />} />
 
 
   

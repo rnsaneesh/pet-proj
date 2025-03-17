@@ -1,0 +1,158 @@
+/* Profile.css */
+
+.profile-container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 2rem;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  
+  .profile-title {
+    color: #333;
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+    border-bottom: 2px solid #f0f0f0;
+    padding-bottom: 0.5rem;
+  }
+  
+  .profile-content {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+  
+  .profile-card {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+  }
+  
+  .profile-header {
+    background-color: #f8f9fa;
+    padding: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #e9ecef;
+  }
+  
+  .profile-header h3 {
+    margin: 0;
+    font-size: 1.4rem;
+    color: #444;
+  }
+  
+  .user-type-badge {
+    background-color: #0077cc;
+    color: white;
+    padding: 0.35rem 0.8rem;
+    border-radius: 50px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    text-transform: capitalize;
+  }
+  
+  .profile-details {
+    padding: 1.5rem;
+  }
+  
+  .detail-item {
+    margin-bottom: 0.8rem;
+    display: flex;
+    align-items: baseline;
+  }
+  
+  .detail-label {
+    font-weight: 600;
+    color: #555;
+    width: 120px;
+    flex-shrink: 0;
+  }
+  
+  .detail-value {
+    color: #333;
+  }
+  
+  /* Quiz Section Styling */
+  .quiz-section {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+  }
+  
+  .quiz-section h3 {
+    background-color: #f8f9fa;
+    padding: 1rem 1.5rem;
+    margin: 0;
+    color: #444;
+    border-bottom: 1px solid #e9ecef;
+  }
+  
+  .table-responsive {
+    overflow-x: auto;
+    padding: 1rem;
+  }
+  
+  .quiz-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+  }
+  
+  .quiz-table th {
+    background-color: #f0f4f8;
+    color: #333;
+    padding: 0.8rem 1rem;
+    font-weight: 600;
+  }
+  
+  .quiz-table td {
+    padding: 0.8rem 1rem;
+    border-bottom: 1px solid #eee;
+  }
+  
+  .quiz-table .row-even {
+    background-color: #fafbfd;
+  }
+  
+  .quiz-table .row-odd {
+    background-color: white;
+  }
+  
+  .loading-spinner {
+    text-align: center;
+    padding: 2rem;
+    color: #666;
+  }
+  
+  .empty-state {
+    padding: 2rem;
+    text-align: center;
+    color: #666;
+  }
+  
+  .error-state {
+    padding: 2rem;
+    text-align: center;
+    color: #d32f2f;
+    background-color: #ffebee;
+    border-radius: 8px;
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .profile-container {
+      padding: 1rem;
+    }
+    
+    .detail-item {
+      flex-direction: column;
+    }
+    
+    .detail-label {
+      width: 100%;
+      margin-bottom: 0.2rem;
+    }
+  }
