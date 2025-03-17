@@ -35,11 +35,11 @@ function Home() {
 
       <h2>Meet Our Featured Pets</h2> 
       <div className="featured-pets">
-        <div className="pet-card">
+        <div className="hpet-card">
           <img src={petImage1} alt="Pet 1" />
           <p>Name: Max, Age: 2, Breed: Labrador</p>
         </div>
-        <div className="pet-card">
+        <div className="hpet-card">
           <img src={petImage2} alt="Pet 2" />
           <p>Name: Luna, Age: 1, Breed: Cat</p>
         </div>

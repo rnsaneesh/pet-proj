@@ -1,47 +1,217 @@
-.about-page {
-    display: flex;
+.about-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 30px 20px;
+  color: #333;
+  font-family: Arial, sans-serif;
+}
+
+.about-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.about-header h1 {
+  font-size: 36px;
+  color: #3498db;
+  margin-bottom: 10px;
+}
+
+.about-tagline {
+  font-size: 18px;
+  color: #666;
+  font-style: italic;
+}
+
+/* Mission Section */
+.about-mission {
+  margin-bottom: 50px;
+}
+
+.about-mission h2, 
+.about-how-it-works h2, 
+.about-benefits h2, 
+.about-guidelines h2, 
+.about-team h2, 
+.about-contact h2 {
+  text-align: center;
+  font-size: 28px;
+  margin-bottom: 25px;
+  color: #3498db;
+  position: relative;
+  padding-bottom: 10px;
+}
+
+.about-mission h2:after, 
+.about-how-it-works h2:after, 
+.about-benefits h2:after, 
+.about-guidelines h2:after, 
+.about-team h2:after, 
+.about-contact h2:after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 3px;
+  background-color: #3498db;
+}
+
+.mission-content {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+
+.mission-image {
+  flex: 0 0 300px;
+  height: 200px;
+  background-image: url('../assets/logo.jpeg');
+  background-size: cover;
+  background-position: center;
+  border-radius: 8px;
+}
+
+.mission-content p {
+  flex: 1;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+/* How it Works Section */
+.about-how-it-works {
+  margin-bottom: 50px;
+}
+
+.steps-container {
+  display: flex;
+  align-items: center;
+  /*flex-wrap: wrap;*/
+  justify-content: space-between;
+  gap: 25px;
+}
+
+.step {
+  flex-basis: calc(50% - 25px);
+  background-color: #f9f9f9;
+  padding: 25px;
+  border-radius: 8px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.step-icon {
+  font-size: 32px;
+  color: #3498db;
+  margin-bottom: 15px;
+}
+
+.step h3 {
+  font-size: 20px;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.step p {
+  font-size: 15px;
+  line-height: 1.5;
+  color: #555;
+}
+
+/* Benefits Section */
+.about-benefits {
+  margin-bottom: 50px;
+}
+
+.benefits-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.benefit {
+  background-color: #f0f7fc;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.benefit h3 {
+  font-size: 18px;
+  margin-bottom: 10px;
+  color: #3498db;
+}
+
+.benefit p {
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+/* Guidelines Section */
+.about-guidelines {
+  margin-bottom: 50px;
+  background-color: #f9f9f9;
+  padding: 30px;
+  border-radius: 8px;
+}
+
+.guidelines-content ul {
+  padding-left: 20px;
+  margin-top: 15px;
+}
+
+.guidelines-content li {
+  margin-bottom: 10px;
+  line-height: 1.5;
+}
+
+/* Team Section */
+.about-team {
+  margin-bottom: 50px;
+}
+
+.about-team p {
+  margin-bottom: 15px;
+  line-height: 1.6;
+}
+
+/* Contact Section */
+.about-contact {
+  background-color: #f0f7fc;
+  padding: 30px;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.contact-info {
+  margin-top: 20px;
+}
+
+.contact-info p {
+  margin-bottom: 10px;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .mission-content {
     flex-direction: column;
-    align-items: center;
-    padding: 20px;
   }
   
-  .about-mission {
+  .mission-image {
+    width: 100%;
+    flex-basis: auto;
     margin-bottom: 20px;
   }
   
-  .our-team {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+  .steps-container {
+    flex-direction: column;
   }
   
-  .team-member {
-    margin: 10px;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  .step {
+    flex-basis: 100%;
   }
   
-  .success-stories button {
-    background-color: #4CAF50;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
+  .benefits-grid {
+    grid-template-columns: 1fr;
   }
-  
-  .contact-us {
-    margin-top: 20px;
-  }
-  
-  .contact-us button {
-    background-color: #4CAF50;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
+}
